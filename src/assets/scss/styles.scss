@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'Soleil';
+    src: url('~@/assets/fonts/SoleilRegular.otf');
+}
+@font-face {
+    font-family: 'Soleil Bold';
+    src: url('~@/assets/fonts/SoleilBold.otf');
+}
+@font-face {
+    font-family: 'Soleil Book';
+    src: url('~@/assets/fonts/SoleilBook.otf');
+}
+@font-face {
+    font-family: 'Soleil Light';
+    src: url('~@/assets/fonts/SoleilLight.otf');
+}
+
+@mixin band-logo-container {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    font-family: 'Soleil', sans-serif;
+    font-weight: 700;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.main-headliner {
+    @include band-logo-container;
+    height: 90px;
+}
+
+.main-sub {
+    @include band-logo-container;
+    height: 50px;
+
+}
+
+.main-third {
+    @include band-logo-container;
+    height: 50px;
+    width: 40%;
+}
+
+.alt-third {
+    @include band-logo-container;
+    height: 50px;
+    width: 20%;
+}
+
+@mixin band-grid-container {
+    display: grid;
+    grid-gap: 2px;
+    height: 100px;
+    div:hover {
+        border: solid #F1B826 1px;
+    }
+}
+
+.band-grid-thursday {
+    @include band-grid-container;
+    padding: 115px 40px 0 60px;
+}
+
+.band-grid-friday {
+    @include band-grid-container;
+    padding: 10px 40px 0 60px;
+}
+
+.band-grid-saturday {
+    @include band-grid-container;
+    padding: 10px 40px 0 60px;
+}
+
+.headliners-one {
+    grid-template-columns: auto;
+}
+
+.headliners-two {
+    grid-template-columns: auto auto;
+}
+
+.sub-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 2px;
+    padding: 0 35px 0 60px;
+}
+
+.sub-grid-four {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 2px;
+    padding: 0 35px 0 60px;
+}
+
+.sub-grid div:hover {
+    border: solid #F1B826 1px;
+}
+
+.sub-grid-four div:hover {
+    border: solid #F1B826 1px;
+}
+
+.band-grid-wednesday {
+    padding: 0 40px 0 60px;
+    display: flex;
+}
+
+.band-grid-wednesday div:hover {
+    border: solid #F1B826 1px;
+}
