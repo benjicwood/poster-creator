@@ -12,17 +12,16 @@ import { bands } from "@benjicwood/artist-assets";
 export default {
   name: "BandSection",
   props: {
-    band: String,        // band id
+    band: String,
     position: String,
     size: String,
-    chosenImage: String, // NEW: direct image URL
+    chosenImage: String,
   },
   computed: {
     bandData() {
       return bands.find((b) => b.id === this.band) || null;
     },
     bandStyle() {
-      // priority: chosenImage → logo → nothing
       const img = this.chosenImage || this.bandData?.logo;
       if (img) {
         return {

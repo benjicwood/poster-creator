@@ -1,48 +1,46 @@
 <template>
   <div class="band-input">
-    <input :class="`band-input-input ${size}`" type="text" name="" id="">
+    <input :class="`band-input-input ${size}`" type="text" name="" id="" />
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'BandInput',
+  name: "BandInput",
   props: {
-      size: String,
-  }
-}
-
+    size: String,
+  },
+};
 </script>
 
 <style scoped>
 .band-input {
-    border: 1px solid transparent;
-    width: 86%;
-    margin-left: 55px;
+  border: 1px solid transparent;
+  width: 86%;
+  margin-left: 55px;
 }
 
 .band-input-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    text-align: center; 
-    color: white;
-    font-family: 'Soleil', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: center;
+  color: white;
+  font-family: "Soleil", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .large {
-    height: 22px;
-    font-size: 15px;
+  height: 22px;
+  font-size: 15px;
 }
 .medium {
-    height: 20px;
-    font-size: 15px;
+  height: 20px;
+  font-size: 15px;
 }
 .small {
-    height: 13px;
-    font-size: 12px;
+  height: 13px;
+  font-size: 12px;
 }
 </style>
