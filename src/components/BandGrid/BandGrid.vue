@@ -1,5 +1,11 @@
 <template>
-  <div class="band-grid-container">
+  <div class="poster-container">
+        <img
+      class="poster-bg"
+      src="../..//assets/background/trees-blank-2026-feb-17-25.png"
+      alt="Festival Poster"
+    />
+    <div class="poster-content">
     <!-- Thursday -->
     <div
       :class="`band-grid-thursday ${
@@ -280,6 +286,7 @@
         :chosenImage="chosenImages.dayFourSecondRowThree"
       />
     </div>
+    </div>
   </div>
   <BandSelectModal
     v-show="isModalVisible"
@@ -436,9 +443,39 @@ export default {
 <style scoped lang="scss">
 @use "../../assets/scss/styles.scss";
 
-.band-grid-container {
-  width: 705px;
+// .poster-container {
+//   background-image: url(../../assets/background/trees-blank-2026-feb-17-25.png);
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   background-position: top center;
+//   min-height: 100vh;
+// }
+
+.poster-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  min-height: 100vh;
+  background: #000; // border/background colour
 }
+
+.poster-bg {
+  max-width: 90vw;    /* leave border at sides */
+  max-height: 100vh;  /* never taller than screen */
+  width: auto;
+  height: auto;
+}
+
+.poster-content {
+  position: absolute;   /* lay grids over the image */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 90vw;      /* match the image sizing */
+  width: 100%;
+}
+
 
 .input-grid div:hover {
   border: solid #f1b826 1px;

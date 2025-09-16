@@ -19,7 +19,7 @@
 
         <!-- 🔥 Preview + selection -->
         <div v-if="selectedBand" class="band-preview">
-          <h4>{{ selectedBand.name }}</h4>
+          <!-- <h4>{{ selectedBand.name }}</h4> -->
 
           <!-- currently selected image -->
           <div v-if="chosenImage" class="band-logo">
@@ -281,6 +281,7 @@ export default {
   font-family: "Soleil", sans-serif;
   position: relative;
   animation: fadeInScale 0.2s ease-out;
+  border: 2px solid #711214;
 }
 
 @keyframes fadeInScale {
@@ -300,8 +301,8 @@ export default {
   background-color: #711214;
   color: white;
   justify-content: space-between;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius:6px;
+  border-top-right-radius: 6px;
 }
 
 .modal-footer {
@@ -384,10 +385,10 @@ input[type="range"] {
 }
 
 .band-logo img {
-  max-width: 180px;
+  max-width: 200px;
   height: auto;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  /* border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
 }
 
 .band-images {
@@ -402,6 +403,8 @@ input[type="range"] {
   border-radius: 4px;
   cursor: pointer;
   transition: border 0.2s, transform 0.2s;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 .band-images img:hover {
   transform: scale(1.05);

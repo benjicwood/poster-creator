@@ -22,25 +22,15 @@ export default {
 </script>
 
 <style scoped>
-/* .poster-style {
-  background-color: black;
-  background-image: url(../assets/background/trees-blank-2026-feb-17-25.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: top left;
-  min-height: 1000px;
-  display: flex;
-  min-width: 709px;
-} */
 .poster-style {
-  width: 100vw;               /* full viewport width */
-  min-height: 100vh;          /* full viewport height */
+  width: 100vw;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;    /* center horizontally */
-  align-items: center;        /* center vertically on taller screens */
+  justify-content: center;
+  align-items: center;
   background-color: black;
-  background-image: url(../assets/background/trees-blank-2026-feb-17-25.png);
-  background-size: contain;   /* scales image while preserving aspect ratio */
+  /* background-image: url(../assets/background/trees-blank-2026-feb-17-25.png); */
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: top center;
   padding: 2rem;
@@ -82,6 +72,5 @@ export default {
     max-width: 100%;
   }
 }
-
 
 </style>
