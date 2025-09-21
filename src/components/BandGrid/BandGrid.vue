@@ -1,293 +1,59 @@
 <template>
-  <div class="poster-container">
-        <img
-      class="poster-bg"
-      src="../..//assets/background/trees-blank-2026-feb-17-25.png"
-      alt="Festival Poster"
-    />
-    <div class="poster-content">
+  <div class="poster-content">
     <!-- Thursday -->
-    <div
-      :class="`band-grid-thursday ${
-        coHeadliner.thursday ? 'headliners-two' : 'headliners-one'
-      }`"
-    >
-      <BandSection
-        position="main-headliner"
-        @click="openModal('dayOneHeadliner', 'Thursday Headliner')"
-        :band="bandPosition.dayOneHeadliner"
-        :size="size.dayOneHeadliner"
-        :chosenImage="chosenImages.dayOneHeadliner"
-      />
-      <BandSection
-        v-if="coHeadliner.thursday"
-        position="main-headliner"
-        @click="openModal('dayOneCoHeadliner', 'Thursday Headliner')"
-        :band="bandPosition.dayOneCoHeadliner"
-        :size="size.dayOneCoHeadliner"
-        :chosenImage="chosenImages.dayOneCoHeadliner"
-      />
-    </div>
-
-    <div class="sub-grid">
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayOneSecondRowOne', 'Thursday Band')"
-        :band="bandPosition.dayOneSecondRowOne"
-        :size="size.dayOneSecondRowOne"
-        :chosenImage="chosenImages.dayOneSecondRowOne"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayOneSecondRowTwo', 'Thursday Band')"
-        :band="bandPosition.dayOneSecondRowTwo"
-        :size="size.dayOneSecondRowTwo"
-        :chosenImage="chosenImages.dayOneSecondRowTwo"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayOneSecondRowThree', 'Thursday Band')"
-        :band="bandPosition.dayOneSecondRowThree"
-        :size="size.dayOneSecondRowThree"
-        :chosenImage="chosenImages.dayOneSecondRowThree"
-      />
-      <!-- <BandSection position="main-sub" @click="openModal('dayOneSecondRowFour', 'Thursday Band')" :band="bandPosition.dayOneSecondRowFour" :size="size.dayOneSecondRowFour" /> -->
-    </div>
-    <div class="sub-grid-four">
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayOneThirdRowOne', 'Thursday Band')"
-        :band="bandPosition.dayOneThirdRowOne"
-        :size="size.dayOneThirdRowOne"
-        :chosenImage="chosenImages.dayOneThirdRowOne"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayOneThirdRowTwo', 'Thursday Band')"
-        :band="bandPosition.dayOneThirdRowTwo"
-        :size="size.dayOneThirdRowTwo"
-        :chosenImage="chosenImages.dayOneThirdRowTwo"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayOneThirdRowThree', 'Thursday Band')"
-        :band="bandPosition.dayOneThirdRowThree"
-        :size="size.dayOneThirdRowThree"
-        :chosenImage="chosenImages.dayOneThirdRowThree"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayOneThirdRowFour', 'Thursday Band')"
-        :band="bandPosition.dayOneThirdRowFour"
-        :size="size.dayOneThirdRowFour"
-        :chosenImage="chosenImages.dayOneThirdRowFour"
-      />
-    </div>
-
-    <div class="input-grid">
-      <BandInput size="medium" />
-      <BandInput size="small" />
-    </div>
+    <DayGrid
+      day="Thursday"
+      slug="dayOne"
+      :bands="days.dayOne"
+      :coHeadliner="coHeadliner.thursday"
+      @open="openModal"
+    />
 
     <!-- Friday -->
-    <div
-      :class="`band-grid-friday ${
-        coHeadliner.friday ? 'headliners-two' : 'headliners-one'
-      }`"
-    >
-      <BandSection
-        position="main-headliner"
-        @click="openModal('dayTwoHeadliner', 'Friday Headliner')"
-        :band="bandPosition.dayTwoHeadliner"
-        :size="size.dayTwoHeadliner"
-        :chosenImage="chosenImages.dayTwoHeadliner"
-      />
-      <BandSection
-        v-if="coHeadliner.friday"
-        position="main-headliner"
-        @click="openModal('dayTwoCoHeadliner', 'Friday Headliner')"
-        :band="bandPosition.dayTwoCoHeadliner"
-        :size="size.dayTwoCoHeadliner"
-        :chosenImage="chosenImages.dayTwoCoHeadliner"
-      />
-    </div>
-
-    <div class="sub-grid">
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayTwoSecondRowOne', 'Friday Band')"
-        :band="bandPosition.dayTwoSecondRowOne"
-        :size="size.dayTwoSecondRowOne"
-        :chosenImage="chosenImages.dayTwoSecondRowOne"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayTwoSecondRowTwo', 'Friday Band')"
-        :band="bandPosition.dayTwoSecondRowTwo"
-        :size="size.dayTwoSecondRowTwo"
-        :chosenImage="chosenImages.dayTwoSecondRowTwo"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayTwoSecondRowThree', 'Friday Band')"
-        :band="bandPosition.dayTwoSecondRowThree"
-        :size="size.dayTwoSecondRowThree"
-        :chosenImage="chosenImages.dayTwoSecondRowThree"
-      />
-      <!-- <BandSection position="main-sub" @click="openModal('dayTwoSecondRowFour', 'Friday Band')" :band="bandPosition.dayTwoSecondRowFour" :size="size.dayTwoSecondRowFour" /> -->
-    </div>
-    <div class="sub-grid-four">
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayTwoThirdRowOne', 'Friday Band')"
-        :band="bandPosition.dayTwoThirdRowOne"
-        :size="size.dayTwoThirdRowOne"
-        :chosenImage="chosenImages.dayTwoThirdRowOne"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayTwoThirdRowTwo', 'Friday Band')"
-        :band="bandPosition.dayTwoThirdRowTwo"
-        :size="size.dayTwoThirdRowTwo"
-        :chosenImage="chosenImages.dayTwoThirdRowTwo"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayTwoThirdRowThree', 'Friday Band')"
-        :band="bandPosition.dayTwoThirdRowThree"
-        :size="size.dayTwoThirdRowThree"
-        :chosenImage="chosenImages.dayTwoThirdRowThree"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayTwoThirdRowFour', 'Friday Band')"
-        :band="bandPosition.dayTwoThirdRowFour"
-        :size="size.dayTwoThirdRowFour"
-        :chosenImage="chosenImages.dayTwoThirdRowThree"
-      />
-    </div>
-
-    <div class="input-grid">
-      <BandInput size="medium" />
-      <BandInput size="small" />
-    </div>
+    <DayGrid
+      day="Friday"
+      slug="dayTwo"
+      :bands="days.dayTwo"
+      :coHeadliner="coHeadliner.friday"
+      @open="openModal"
+    />
 
     <!-- Saturday -->
-    <div
-      :class="`band-grid-saturday ${
-        coHeadliner.saturday ? 'headliners-two' : 'headliners-one'
-      }`"
-    >
-      <BandSection
-        position="main-headliner"
-        @click="openModal('dayThreeHeadliner', 'Saturday Headliner')"
-        :band="bandPosition.dayThreeHeadliner"
-        :size="size.dayThreeHeadliner"
-        :chosenImage="chosenImages.dayThreeHeadliner"
-      />
-      <BandSection
-        v-if="coHeadliner.saturday"
-        position="main-headliner"
-        @click="openModal('dayThreeCoHeadliner', 'Saturday Headliner')"
-        :band="bandPosition.dayThreeCoHeadliner"
-        :size="size.dayThreeCoHeadliner"
-        :chosenImage="chosenImages.dayThreeCoHeadliner"
-      />
-    </div>
-
-    <div class="sub-grid">
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayThreeSecondRowOne', 'Saturday Band')"
-        :band="bandPosition.dayThreeSecondRowOne"
-        :size="size.dayThreeSecondRowOne"
-        :chosenImage="chosenImages.dayThreeSecondRowOne"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayThreeSecondRowTwo', 'Saturday Band')"
-        :band="bandPosition.dayThreeSecondRowTwo"
-        :size="size.dayThreeSecondRowTwo"
-        :chosenImage="chosenImages.dayThreeSecondRowTwo"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayThreeSecondRowThree', 'Saturday Band')"
-        :band="bandPosition.dayThreeSecondRowThree"
-        :size="size.dayThreeSecondRowThree"
-        :chosenImage="chosenImages.dayThreeSecondRowThree"
-      />
-      <!-- <BandSection position="main-sub" @click="openModal('dayThreeSecondRowFour', 'Saturday Band')" :band="bandPosition.dayThreeSecondRowFour" :size="size.dayThreeSecondRowFour" /> -->
-    </div>
-    <div class="sub-grid-four">
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayThreeThirdRowOne', 'Saturday Band')"
-        :band="bandPosition.dayThreeThirdRowOne"
-        :size="size.dayThreeThirdRowOne"
-        :chosenImage="chosenImages.dayThreeThirdRowOne"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayThreeThirdRowTwo', 'Saturday Band')"
-        :band="bandPosition.dayThreeThirdRowTwo"
-        :size="size.dayThreeThirdRowTwo"
-        :chosenImage="chosenImages.dayThreeThirdRowTwo"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayThreeThirdRowThree', 'Saturday Band')"
-        :band="bandPosition.dayThreeThirdRowThree"
-        :size="size.dayThreeThirdRowThree"
-        :chosenImage="chosenImages.dayThreeThirdRowThree"
-      />
-      <BandSection
-        position="main-sub"
-        @click="openModal('dayThreeThirdRowFour', 'Saturday Band')"
-        :band="bandPosition.dayThreeThirdRowFour"
-        :size="size.dayThreeThirdRowFour"
-        :chosenImage="chosenImages.dayThreeThirdRowFour"
-      />
-    </div>
-
-    <div class="input-grid">
-      <BandInput size="medium" />
-      <BandInput size="small" />
-    </div>
+    <DayGrid
+      day="Saturday"
+      slug="dayThree"
+      :bands="days.dayThree"
+      :coHeadliner="coHeadliner.saturday"
+      @open="openModal"
+    />
 
     <!-- Wednesday -->
     <div class="band-grid-wednesday">
-      <BandSection
-        position="main-third"
-        @click="openModal('dayFourHeadliner', 'Wednesday Headliner')"
-        :band="bandPosition.dayFourHeadliner"
-        :size="size.dayFourHeadliner"
-        :chosenImage="chosenImages.dayFourHeadliner"
-      />
-      <BandSection
-        position="alt-third"
-        @click="openModal('dayFourSecondRowOne', 'Wednesday Band')"
-        :band="bandPosition.dayFourSecondRowOne"
-        :size="size.dayFourSecondRowOne"
-        :chosenImage="chosenImages.dayFourSecondRowOne"
-      />
-      <BandSection
-        position="alt-third"
-        @click="openModal('dayFourSecondRowTwo', 'Wednesday Band')"
-        :band="bandPosition.dayFourSecondRowTwo"
-        :size="size.dayFourSecondRowTwo"
-        :chosenImage="chosenImages.dayFourSecondRowTwo"
-      />
-      <BandSection
-        position="alt-third"
-        @click="openModal('dayFourSecondRowThree', 'Wednesday Band')"
-        :band="bandPosition.dayFourSecondRowThree"
-        :size="size.dayFourSecondRowThree"
-        :chosenImage="chosenImages.dayFourSecondRowThree"
-      />
+      <!-- Headliner -->
+    <BandSection
+      class="headliner"
+      position="headliner"
+      @click="openModal({ slug: 'dayFour', position: 'headliner', title: 'Wednesday Headliner' })"
+      :band="days.dayFour.headliner.band"
+      :size="days.dayFour.headliner.size"
+      :chosenImage="days.dayFour.headliner.chosenImage"
+    />
+
+    <!-- Other 3 bands -->
+    <BandSection
+      v-for="(slot, i) in days.dayFour.secondRow"
+      :key="`wednesday-${i}`"
+      class="main-sub"
+      :position="`secondRow.${i}`"
+      @click="openModal({ slug: 'dayFour', position: `secondRow.${i}`, title: `Wednesday Band ${i + 1}` })"
+      :band="slot.band"
+      :size="slot.size"
+      :chosenImage="slot.chosenImage"
+    />
     </div>
-    </div>
+
   </div>
+  <!-- Modal -->
   <BandSelectModal
     v-show="isModalVisible"
     @selected="onSelect"
@@ -300,141 +66,135 @@
     :thursdayCoHeadliner="coHeadliner.thursday"
     :fridayCoHeadliner="coHeadliner.friday"
     :saturdayCoHeadliner="coHeadliner.saturday"
-    :currentBand="bandPosition[modalPosition]"
-    :currentImage="chosenImages[modalPosition]"
+    :currentBand="currentBand"
+    :currentImage="currentImage"
   />
 </template>
 
 <script>
-import BandSection from "../BandGrid/BandSection.vue";
-
+import DayGrid from "./DayGrid.vue";
 import BandSelectModal from "../BandSelectModal/BandSelectModal.vue";
-import BandInput from "../BandGrid/BandInput.vue";
+import BandSection from "./BandSection.vue";
 
 export default {
-  name: "TreesPoster",
-  components: { BandSection, BandSelectModal, BandInput },
-  props: {
-    msg: String,
-  },
+  name: "BandGrid",
+  components: { DayGrid, BandSelectModal, BandSection },
   data() {
     return {
       isModalVisible: false,
       modalTitle: "",
-      bandPosition: {
-        dayOneHeadliner: "",
-        dayOneCoHeadliner: "",
-        dayOneSecondRowOne: "",
-        dayOneSecondRowTwo: "",
-        dayOneSecondRowThree: "",
-        dayOneSecondRowFour: "",
-        dayOneThirdRowOne: "",
-        dayOneThirdRowTwo: "",
-        dayOneThirdRowThree: "",
-        dayOneThirdRowFour: "",
-        dayTwoHeadliner: "",
-        dayTwoCoHeadliner: "",
-        dayTwoSecondRowOne: "",
-        dayTwoSecondRowTwo: "",
-        dayTwoSecondRowThree: "",
-        dayTwoSecondRowFour: "",
-        dayTwoThirdRowOne: "",
-        dayTwoThirdRowTwo: "",
-        dayTwoThirdRowThree: "",
-        dayTwoThirdRowFour: "",
-        dayThreeHeadliner: "",
-        dayThreeCoHeadliner: "",
-        dayThreeSecondRowOne: "",
-        dayThreeSecondRowTwo: "",
-        dayThreeSecondRowThree: "",
-        dayThreeSecondRowFour: "",
-        dayThreeThirdRowOne: "",
-        dayThreeThirdRowTwo: "",
-        dayThreeThirdRowThree: "",
-        dayThreeThirdRowFour: "",
-        dayFourHeadliner: "",
-        dayFourSecondRowOne: "",
-        dayFourSecondRowTwo: "",
-        dayFourSecondRowThree: "",
+      modalPosition: null,
+      modalSlug: null,
+      key: 0,
+      activeBand: null,
+
+      days: {
+        dayOne: {
+          headliner: { band: "", size: "", chosenImage: null },
+          coHeadliner: { band: "", size: "", chosenImage: null },
+          secondRow: [
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+          ],
+          thirdRow: [
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+          ],
+        },
+        dayTwo: {
+          headliner: { band: "", size: "", chosenImage: null },
+          coHeadliner: { band: "", size: "", chosenImage: null },
+          secondRow: [
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+          ],
+          thirdRow: [
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+          ],
+        },
+        dayThree: {
+          headliner: { band: "", size: "", chosenImage: null },
+          coHeadliner: { band: "", size: "", chosenImage: null },
+          secondRow: [
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+          ],
+          thirdRow: [
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+          ],
+        },
+        dayFour: {
+          headliner: { band: "", size: "", chosenImage: null },
+          secondRow: [
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+            { band: "", size: "", chosenImage: null },
+          ],
+        },
       },
-      size: {
-        dayOneHeadliner: "",
-        dayOneCoHeadliner: "",
-        dayOneSecondRowOne: "",
-        dayOneSecondRowTwo: "",
-        dayOneSecondRowThree: "",
-        dayOneSecondRowFour: "",
-        dayOneThirdRowOne: "",
-        dayOneThirdRowTwo: "",
-        dayOneThirdRowThree: "",
-        dayOneThirdRowFour: "",
-        dayTwoHeadliner: "",
-        dayTwoCoHeadliner: "",
-        dayTwoSecondRowOne: "",
-        dayTwoSecondRowTwo: "",
-        dayTwoSecondRowThree: "",
-        dayTwoSecondRowFour: "",
-        dayTwoThirdRowOne: "",
-        dayTwoThirdRowTwo: "",
-        dayTwoThirdRowThree: "",
-        dayTwoThirdRowFour: "",
-        dayThreeHeadliner: "",
-        dayThreeCoHeadliner: "",
-        dayThreeSecondRowOne: "",
-        dayThreeSecondRowTwo: "",
-        dayThreeSecondRowThree: "",
-        dayThreeSecondRowFour: "",
-        dayThreeThirdRowOne: "",
-        dayThreeThirdRowTwo: "",
-        dayThreeThirdRowThree: "",
-        dayThreeThirdRowFour: "",
-        dayFourHeadliner: "",
-        dayFourSecondRowOne: "",
-        dayFourSecondRowTwo: "",
-        dayFourSecondRowThree: "",
-      },
+
       coHeadliner: {
         thursday: false,
         friday: false,
         saturday: false,
       },
-      chosenImages: {
-        dayOneHeadliner: null,
-        dayOneCoHeadliner: null,
-      },
-      key: 0,
-      activeBand: null,
     };
   },
+  computed: {
+    currentBand() {
+      return this.days[this.modalSlug]?.[this.modalPosition]?.band ?? "";
+    },
+    currentImage() {
+      return (
+        this.days[this.modalSlug]?.[this.modalPosition]?.chosenImage ?? null
+      );
+    },
+  },
   methods: {
-    openModal(position, title) {
+    openModal({ slug, position, title }) {
+      this.modalSlug = slug;
       this.modalPosition = position;
       this.modalTitle = title;
-      this.key = position;
-      this.activeBand = !!this.bandPosition[this.modalPosition];
+      this.key = `${slug}-${position}`;
+      const slot = this.getSlot(slug, position);
+      this.activeBand = !!slot.band;
       this.isModalVisible = true;
     },
     onSelect(selected) {
-      const selectedBand = selected.id ?? "";
-      this.bandPosition[this.modalPosition] = selectedBand;
-      this.chosenImages[this.modalPosition] = selected.chosenImage;
+      const slot = this.getSlot(this.modalSlug, this.modalPosition);
+      slot.band = selected.id ?? "";
+      slot.chosenImage = selected.chosenImage;
     },
     onResize(size) {
-      this.size[this.modalPosition] = `${size}-band-logo`;
+      const slot = this.getSlot(this.modalSlug, this.modalPosition);
+      slot.size = `${size}-band-logo`;
     },
     handleCoHeadliner({ day, value }) {
-      if (day === "Thursday") {
-        this.coHeadliner.thursday = value;
-      }
-      if (day === "Friday") {
-        this.coHeadliner.friday = value;
-      }
-      if (day === "Saturday") {
-        this.coHeadliner.saturday = value;
-      }
+      if (day === "Thursday") this.coHeadliner.thursday = value;
+      if (day === "Friday") this.coHeadliner.friday = value;
+      if (day === "Saturday") this.coHeadliner.saturday = value;
     },
     closeModal() {
       this.isModalVisible = false;
+    },
+    getSlot(slug, position) {
+      const path = position.split(".");
+      let slot = this.days[slug];
+      for (const key of path) {
+        slot = slot[key];
+      }
+      return slot;
     },
   },
 };
@@ -443,67 +203,59 @@ export default {
 <style scoped lang="scss">
 @use "../../assets/scss/styles.scss";
 
-// .poster-container {
-//   background-image: url(../../assets/background/trees-blank-2026-feb-17-25.png);
-//   background-size: contain;
-//   background-repeat: no-repeat;
-//   background-position: top center;
-//   min-height: 100vh;
-// }
-
-.poster-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  min-height: 100vh;
-  background: #000; // border/background colour
-}
-
-.poster-bg {
-  max-width: 90vw;    /* leave border at sides */
-  max-height: 100vh;  /* never taller than screen */
-  width: auto;
-  height: auto;
-}
-
 .poster-content {
-  position: absolute;   /* lay grids over the image */
+  position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 90vw;      /* match the image sizing */
   width: 100%;
+  height: 100%;           /* desktop: full poster height */
+  box-sizing: border-box;
+  padding-top: 15%;     /* aligns headliner with artwork */
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right: 4%;
+}
+
+.row {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; // centers bands horizontally
+}
+
+.band-grid-wednesday {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1%;
+  height: 7%;
+  box-sizing: border-box;
 }
 
 
-.input-grid div:hover {
-  border: solid #f1b826 1px;
+/* First slot (headliner) */
+.band-grid-wednesday .headliner {
+  width: 40%;
 }
 
-.smallest-band-logo {
-  transform: scale(0.7);
-}
-.smaller-band-logo {
-  transform: scale(0.8);
-}
-.small-band-logo {
-  transform: scale(0.9);
+/* Remaining three slots */
+.band-grid-wednesday .main-sub {
+  width: 20%;
 }
 
-.normal-band-logo {
-  transform: scale(1);
+.band-grid-wednesday .headliner,
+.band-grid-wednesday .main-sub {
+  border: 1px solid transparent;  // reserve space
+  box-sizing: border-box;          // include border in width/height
 }
 
-.large-band-logo {
-  transform: scale(1.1);
+.band-grid-wednesday .headliner:hover,
+.band-grid-wednesday .main-sub:hover {
+  border-color: #C67D0E;
 }
 
-.larger-band-logo {
-  transform: scale(1.2);
-}
 
-.largest-band-logo {
-  transform: scale(1.3);
-}
+
+
 </style>

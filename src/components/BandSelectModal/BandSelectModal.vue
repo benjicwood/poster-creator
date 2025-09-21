@@ -276,12 +276,17 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 50%;
   border-radius: 10px;
   font-family: "Soleil", sans-serif;
   position: relative;
   animation: fadeInScale 0.2s ease-out;
   border: 2px solid #711214;
+}
+
+@media screen and (min-width: 992px) {
+  .modal {
+    max-width: 80%;
+  }
 }
 
 @keyframes fadeInScale {

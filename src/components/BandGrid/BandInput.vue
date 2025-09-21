@@ -16,8 +16,10 @@ export default {
 <style scoped>
 .band-input {
   border: 1px solid transparent;
-  width: 86%;
-  margin-left: 55px;
+}
+
+.band-input:hover {
+  border: solid #C67D0E 1px;
 }
 
 .band-input-input {

@@ -30,6 +30,29 @@ body {
   justify-content: center; /* horizontal centering */
   align-items: flex-start; /* vertical: start/top */
   background-color: #242424; /* default background */
+  background-image: url(./assets/background/trees-background-pattern.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+/* dark overlay */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* tweak opacity to taste */
+  pointer-events: none; /* ensures overlay doesn't block clicks */
+  z-index: 0;
+}
+
+/* make your content above the overlay */
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 h1 {
@@ -66,7 +89,6 @@ button:focus-visible {
   display: flex;
   justify-content: center; /* horizontally center Poster */
   align-items: flex-start; /* align to top */
-  background-color: black; /* fallback */
 }
 
 @media (prefers-color-scheme: light) {
