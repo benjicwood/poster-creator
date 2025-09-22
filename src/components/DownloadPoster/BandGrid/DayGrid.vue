@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use "../../assets/scss/styles.scss";
+@use "../../../assets/scss/styles.scss";
 
 .band-grid {
   height: 30%;

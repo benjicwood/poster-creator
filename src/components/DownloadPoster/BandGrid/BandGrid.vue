@@ -73,7 +73,7 @@
 
 <script>
 import DayGrid from "./DayGrid.vue";
-import BandSelectModal from "../BandSelectModal/BandSelectModal.vue";
+import BandSelectModal from "../../BandSelectModal/BandSelectModal.vue";
 import BandSection from "./BandSection.vue";
 
 export default {
@@ -201,7 +201,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use "../../assets/scss/styles.scss";
+@use "../../../assets/scss/styles.scss";
 
 .poster-content {
   position: absolute;

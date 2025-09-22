@@ -3,7 +3,7 @@
     <div class="poster-wrapper">
       <img
         class="poster-background"
-        src="../assets/background/trees-blank-2026.png"
+        src="../../assets/background/trees-blank-2026.png"
         alt="Festival Poster"
       />
       <BandGrid />
@@ -15,7 +15,7 @@
 import BandGrid from "./BandGrid/BandGrid.vue";
 
 export default {
-  name: "Poster",
+  name: "DownloadPoster",
   components: { BandGrid },
 };
 </script>
