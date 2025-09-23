@@ -38,24 +38,22 @@
     border: solid #C67D0E 1px;
 }
 
-.main-sub {
-    @include band-logo-container;
-    @include hover-border;
-    height: 100%;
-}
+// .main-sub {
+//     @include band-logo-container;
+//     @include hover-border;
+//     height: 100%;
+// }
 
-.main-third {
-    @include band-logo-container;
-    @include hover-border;
-    height: 50px;
-    width: 40%;
-}
+// .main-third {
+//     @include band-logo-container;
+//     @include hover-border;
+//     height: 50px;
+// }
 
-.alt-third {
-    @include band-logo-container;
-    height: 50px;
-    width: 20%;
-}
+// .alt-third {
+//     @include band-logo-container;
+//     height: 50px;
+// }
 
 @mixin band-grid-container {
     display: grid;

@@ -1,8 +1,8 @@
 <template>
   <div
     :class="[
-      'band-grid',
-      `band-grid-${slug}`,
+      'download-band-grid',
+      `download-band-grid-${slug}`,
       coHeadliner ? 'headliners-two' : 'headliners-one',
     ]"
   >
@@ -12,23 +12,15 @@
       :class="coHeadliner ? 'headliners-two' : 'headliners-one'"
     >
       <BandSection
-        position="main-headliner"
+        position="mainstage-headliner"
         @click="emitOpen('headliner', `${day} Headliner`)"
         :band="bands.headliner.band"
         :size="bands.headliner.size"
         :chosenImage="bands.headliner.chosenImage"
       />
-      <BandSection
-        v-if="coHeadliner"
-        position="main-headliner"
-        @click="emitOpen('coHeadliner', `${day} Headliner`)"
-        :band="bands.coHeadliner.band"
-        :size="bands.coHeadliner.size"
-        :chosenImage="bands.coHeadliner.chosenImage"
-      />
     </div>
 
-    <!-- Second row -->
+    <!-- Main stage undercard -->
     <div class="sub-grid">
       <BandSection
         v-for="(slot, i) in bands.secondRow"
@@ -41,13 +33,53 @@
       />
     </div>
 
-    <!-- Third row -->
+    <div class="input-grid">
+      <BandInput size="medium" />
+      <BandInput size="small" />
+      <BandInput size="small" />
+      <BandInput size="small" />
+    </div>
+
+    <!-- Second stage -->
     <div class="sub-grid-four">
       <BandSection
         v-for="(slot, i) in bands.thirdRow"
         :key="`third-${i}`"
         position="main-sub"
         @click="emitOpen(`thirdRow.${i}`, `${day} Band`)"
+        :band="slot.band"
+        :size="slot.size"
+        :chosenImage="slot.chosenImage"
+      />
+    </div>
+
+    <div class="input-grid">
+      <BandInput size="medium" />
+      <BandInput size="small" />
+      <BandInput size="small" />
+      <BandInput size="small" />
+    </div>
+
+    <!-- third stage -->
+    <div class="sub-grid-four">
+      <BandSection
+        v-for="(slot, i) in bands.fourthRow"
+        :key="`fourth-${i}`"
+        position="main-sub"
+        @click="emitOpen(`fourthRow.${i}`, `${day} Band`)"
+        :band="slot.band"
+        :size="slot.size"
+        :chosenImage="slot.chosenImage"
+      />
+    </div>
+
+      <!-- fourth stage -->
+    <div class="sub-grid-four">
+      <BandSection
+        v-for="(slot, i) in bands.fifthRow"
+        :key="`fourth-${i}`"
+        position="main-sub"
+        @click="emitOpen(`fourthRow.${i}`, `${day} Band`)"
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
@@ -72,7 +104,7 @@ export default {
   props: {
     day: { type: String, required: true }, // e.g. "Thursday"
     slug: { type: String, required: true }, // e.g. "dayOne"
-    bands: { type: Object, required: true }, // nested object with headliner/coHeadliner/secondRow/thirdRow
+    bands: { type: Object, required: true }, // includes headliner, coHeadliner, secondRow, thirdRow, fourthRow
     coHeadliner: { type: Boolean, default: false },
   },
   emits: ["open"],
@@ -87,9 +119,10 @@ export default {
 <style scoped lang="scss">
 @use "../../../assets/scss/styles.scss";
 
-.band-grid {
-  height: 30%;
+.download-band-grid {
+  height: 100%;
   box-sizing: border-box;
+  border: 2px solid pink;
 }
 
 .smallest-band-logo {
@@ -117,18 +150,11 @@ export default {
 .headliners-row.headliners-one {
   display: grid;
   grid-template-columns: 1fr; /* single column */
-  height: 31%;
 }
 
-.headliners-row.headliners-two {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* two equal columns */
-  height: 31%;
-  gap: 0;
-}
-
-.headliners-row.two-headliners > * {
-  flex: 1; /* equal width for both headliners */
-  max-width: 50%; /* optional, to prevent them from getting too wide */
+.sub-grid,
+.sub-grid-four {
+  display: flex;
+  flex-direction: column;
 }
 </style>
