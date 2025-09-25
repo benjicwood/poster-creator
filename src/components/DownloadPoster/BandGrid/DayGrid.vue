@@ -1,16 +1,7 @@
 <template>
-  <div
-    :class="[
-      'download-band-grid',
-      `download-band-grid-${slug}`,
-      coHeadliner ? 'headliners-two' : 'headliners-one',
-    ]"
-  >
+  <div :class="['download-band-grid', `download-band-grid-${slug}, `]">
     <!-- Headliner(s) -->
-    <div
-      class="headliners-row"
-      :class="coHeadliner ? 'headliners-two' : 'headliners-one'"
-    >
+    <div class="mainstage-block">
       <BandSection
         position="mainstage-headliner"
         @click="emitOpen('headliner', `${day} Headliner`)"
@@ -18,10 +9,8 @@
         :size="bands.headliner.size"
         :chosenImage="bands.headliner.chosenImage"
       />
-    </div>
-
-    <!-- Main stage undercard -->
-    <div class="sub-grid">
+      <!-- Main stage undercard -->
+      <!-- <div class="main-stage-block"> -->
       <BandSection
         v-for="(slot, i) in bands.secondRow"
         :key="`second-${i}`"
@@ -31,65 +20,71 @@
         :size="slot.size"
         :chosenImage="slot.chosenImage"
       />
+      <!-- </div> -->
+      <div class="mainstage-input-grid">
+        <BandInput size="medium" />
+        <BandInput size="medium" />
+        <BandInput size="medium" />
+      </div>
     </div>
 
-    <div class="input-grid">
-      <BandInput size="medium" />
-      <BandInput size="small" />
-      <BandInput size="small" />
-      <BandInput size="small" />
-    </div>
-
-    <!-- Second stage -->
-    <div class="sub-grid-four">
+    <div class="second-stage-block">
+      <!-- Second stage -->
       <BandSection
         v-for="(slot, i) in bands.thirdRow"
         :key="`third-${i}`"
-        position="main-sub"
+        :position="i === 0 ? 'second-stage' : 'second-stage smaller'"
         @click="emitOpen(`thirdRow.${i}`, `${day} Band`)"
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
       />
+
+      <div class="input-grid">
+        <BandInput size="medium" />
+        <BandInput size="small" />
+        <BandInput size="small" />
+        <BandInput size="small" />
+      </div>
     </div>
 
-    <div class="input-grid">
-      <BandInput size="medium" />
-      <BandInput size="small" />
-      <BandInput size="small" />
-      <BandInput size="small" />
-    </div>
-
-    <!-- third stage -->
-    <div class="sub-grid-four">
+    <div class="third-stage-block">
+      <!-- third stage -->
       <BandSection
         v-for="(slot, i) in bands.fourthRow"
         :key="`fourth-${i}`"
-        position="main-sub"
+        position="third-stage"
         @click="emitOpen(`fourthRow.${i}`, `${day} Band`)"
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
       />
+
+      <div class="input-grid">
+        <!-- <BandInput size="medium" /> -->
+        <BandInput size="small" />
+        <BandInput size="small" />
+        <BandInput size="small" />
+      </div>
     </div>
 
+    <div class="fourth-stage-block">
       <!-- fourth stage -->
-    <div class="sub-grid-four">
       <BandSection
         v-for="(slot, i) in bands.fifthRow"
-        :key="`fourth-${i}`"
-        position="main-sub"
-        @click="emitOpen(`fourthRow.${i}`, `${day} Band`)"
+        :key="`fifth-${i}`"
+        position="fourth-stage"
+        @click="emitOpen(`fifthRow.${i}`, `${day} Band`)"
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
       />
-    </div>
 
-    <!-- Inputs (optional, could also be slotted in) -->
-    <div class="input-grid">
-      <BandInput size="medium" />
-      <BandInput size="small" />
+      <!-- Inputs (optional, could also be slotted in) -->
+      <div class="input-grid">
+        <BandInput size="medium" />
+        <BandInput size="small" />
+      </div>
     </div>
   </div>
 </template>
@@ -117,12 +112,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use "../../../assets/scss/styles.scss";
-
 .download-band-grid {
   height: 100%;
   box-sizing: border-box;
-  border: 2px solid pink;
+}
+
+.mainstage-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // pushes BandInputs to the bottom
+  height: 40%;
+  box-sizing: border-box;
+}
+
+// .mainstage-input-grid {
+//   justify-content: space-between;
+// }
+
+.second-stage-block {
+  height: 27%;
+}
+
+.third-stage-block {
+  height: 18%;
+}
+
+.fourth-stage-block {
+  height: 15%;
 }
 
 .smallest-band-logo {
@@ -145,16 +161,5 @@ export default {
 }
 .largest-band-logo {
   transform: scale(1.3);
-}
-
-.headliners-row.headliners-one {
-  display: grid;
-  grid-template-columns: 1fr; /* single column */
-}
-
-.sub-grid,
-.sub-grid-four {
-  display: flex;
-  flex-direction: column;
 }
 </style>

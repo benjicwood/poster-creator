@@ -215,6 +215,7 @@ export default {
   padding-bottom: 5%;
   padding-left: 5%;
   padding-right: 4%;
+  border: 3px solid white;
 }
 
 .row {
@@ -232,7 +233,6 @@ export default {
   height: 7%;
   box-sizing: border-box;
 }
-
 
 /* First slot (headliner) */
 .band-grid-wednesday .headliner {

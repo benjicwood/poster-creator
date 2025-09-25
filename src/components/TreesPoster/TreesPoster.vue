@@ -37,7 +37,7 @@ export default {
 
 .poster-background {
   display: block;
-  max-width: 90vw;
+  max-width: 98vw;
   max-height: 100vh;
   width: auto;
   height: auto;

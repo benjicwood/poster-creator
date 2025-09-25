@@ -150,5 +150,6 @@ export default {
   padding-left: 2%;
   padding-right: 2%;
   box-sizing: border-box;
+  border: 3px solid white;
 }
 </style>
