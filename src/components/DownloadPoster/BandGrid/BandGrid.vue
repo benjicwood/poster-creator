@@ -102,7 +102,7 @@ export default {
     openModal({ slug, position, title }) {
       this.modalSlug = slug;
       this.modalPosition = position;
-      this.modalTitle = title;
+      this.modalTitle = `${title}:`;
       this.key = `${slug}-${position}`;
       const slot = this.getSlot(slug, position);
       this.activeBand = !!slot.band;
@@ -110,8 +110,16 @@ export default {
     },
     onSelect(selected) {
       const slot = this.getSlot(this.modalSlug, this.modalPosition);
-      slot.band = selected.id ?? "";
-      slot.chosenImage = selected.chosenImage;
+
+      if (selected.custom) {
+        // custom typed band name
+        slot.band = selected.name; // store the raw text
+        slot.chosenImage = null; // no image
+      } else {
+        // normal band from assets
+        slot.band = selected.id ?? "";
+        slot.chosenImage = selected.chosenImage;
+      }
     },
     onResize(size) {
       const slot = this.getSlot(this.modalSlug, this.modalPosition);

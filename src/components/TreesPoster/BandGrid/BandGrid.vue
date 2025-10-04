@@ -171,10 +171,23 @@ export default {
       this.activeBand = !!slot.band;
       this.isModalVisible = true;
     },
-    onSelect(selected) {
+    // onSelect(selected) {
+    //   const slot = this.getSlot(this.modalSlug, this.modalPosition);
+    //   slot.band = selected.id ?? "";
+    //   slot.chosenImage = selected.chosenImage;
+    // },
+      onSelect(selected) {
       const slot = this.getSlot(this.modalSlug, this.modalPosition);
-      slot.band = selected.id ?? "";
-      slot.chosenImage = selected.chosenImage;
+
+      if (selected.custom) {
+        // custom typed band name
+        slot.band = selected.name; // store the raw text
+        slot.chosenImage = null; // no image
+      } else {
+        // normal band from assets
+        slot.band = selected.id ?? "";
+        slot.chosenImage = selected.chosenImage;
+      }
     },
     onResize(size) {
       const slot = this.getSlot(this.modalSlug, this.modalPosition);

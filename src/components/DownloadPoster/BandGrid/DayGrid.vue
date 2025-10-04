@@ -121,7 +121,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between; // pushes BandInputs to the bottom
-  height: 40%;
+  height: 42%;
   box-sizing: border-box;
 }
 
@@ -134,11 +134,11 @@ export default {
 }
 
 .third-stage-block {
-  height: 18%;
+  height: 17%;
 }
 
 .fourth-stage-block {
-  height: 15%;
+  height: 14%;
 }
 
 .smallest-band-logo {

@@ -1,14 +1,12 @@
 <template>
-  <div
-    :class="`${position} ${band} ${band && size ? size : ''}`"
-    :style="chosenImage ? { backgroundImage: `url(${chosenImage})` } : {}"
-  >
-    <!-- fallback text if no image -->
-    <span v-if="!chosenImage">{{ band }}</span>
+  <div :class="[position, size, 'band-slot']" :style="bandStyle" @click="$emit('click')">
+    <span v-if="!bandStyle.backgroundImage && band" class="band-text">{{ band }}</span>
   </div>
 </template>
 
 <script>
+import { bands } from "@benjicwood/artist-assets";
+
 export default {
   name: "BandSection",
   props: {
@@ -16,6 +14,23 @@ export default {
     position: String,
     size: String,
     chosenImage: String,
+  },
+  computed: {
+    bandData() {
+      return bands.find((b) => b.id === this.band) || null;
+    },
+    bandStyle() {
+      const img = this.chosenImage || this.bandData?.logo;
+      if (img) {
+        return {
+          backgroundImage: `url(${img})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        };
+      }
+      return {};
+    },
   },
 };
 </script>
@@ -143,4 +158,21 @@ export default {
   text-align: center;
   border: 1px solid transparent;
 }
+
+.band-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; // handles multi-word names
+}
+
+.band-text {
+  color: white; // festival poster default
+  font-family: 'Impact', sans-serif;
+  line-height: 1.1;
+  word-break: break-word;
+  max-width: 90%; // stops text overflowing
+  font-size: clamp(0.8rem, 4vw, 2rem); 
+}
+
 </style>
