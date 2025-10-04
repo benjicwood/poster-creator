@@ -1,6 +1,6 @@
 <template>
   <div class="menu-screen">
-    <router-link to="/poster" class="menu-square stacked">
+    <router-link to="/trees" class="menu-square stacked">
         <!-- <p>Stacked Days Poster</p> -->
     </router-link>
     <router-link to="/download" class="menu-square columned">

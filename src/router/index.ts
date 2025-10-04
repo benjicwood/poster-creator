@@ -8,8 +8,8 @@ import DownloadPoster from '../components/DownloadPoster/DownloadPoster.vue';
 
 const routes = [
   { path: "/", component: HomeMenu },
-  { path: '/poster', name: 'Poster', component: TreesPoster },
-  { path: '/download', name: 'About', component: DownloadPoster },
+  { path: '/trees', name: 'Trees', component: TreesPoster },
+  { path: '/download', name: 'Download', component: DownloadPoster },
 ]
 
 const router = createRouter({
