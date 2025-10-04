@@ -5,7 +5,6 @@
       day="Thursday"
       slug="dayOne"
       :bands="days.dayOne"
-      :coHeadliner="coHeadliner.thursday"
       @open="openModal"
     />
 
@@ -14,7 +13,6 @@
       day="Friday"
       slug="dayTwo"
       :bands="days.dayTwo"
-      :coHeadliner="coHeadliner.friday"
       @open="openModal"
     />
 
@@ -23,7 +21,6 @@
       day="Saturday"
       slug="dayThree"
       :bands="days.dayThree"
-      :coHeadliner="coHeadliner.saturday"
       @open="openModal"
     />
 
@@ -63,9 +60,6 @@
     :title="modalTitle"
     :key="key ? key.toString() : ''"
     :hasBand="activeBand"
-    :thursdayCoHeadliner="coHeadliner.thursday"
-    :fridayCoHeadliner="coHeadliner.friday"
-    :saturdayCoHeadliner="coHeadliner.saturday"
     :currentBand="currentBand"
     :currentImage="currentImage"
   />
@@ -73,7 +67,7 @@
 
 <script>
 import DayGrid from "./DayGrid.vue";
-import BandSelectModal from "../BandSelectModal/BandSelectModal.vue";
+import BandSelectModal from "../../BandSelectModal/BandSelectModal.vue";
 import BandSection from "./BandSection.vue";
 
 export default {
@@ -91,7 +85,6 @@ export default {
       days: {
         dayOne: {
           headliner: { band: "", size: "", chosenImage: null },
-          coHeadliner: { band: "", size: "", chosenImage: null },
           secondRow: [
             { band: "", size: "", chosenImage: null },
             { band: "", size: "", chosenImage: null },
@@ -106,7 +99,6 @@ export default {
         },
         dayTwo: {
           headliner: { band: "", size: "", chosenImage: null },
-          coHeadliner: { band: "", size: "", chosenImage: null },
           secondRow: [
             { band: "", size: "", chosenImage: null },
             { band: "", size: "", chosenImage: null },
@@ -121,7 +113,6 @@ export default {
         },
         dayThree: {
           headliner: { band: "", size: "", chosenImage: null },
-          coHeadliner: { band: "", size: "", chosenImage: null },
           secondRow: [
             { band: "", size: "", chosenImage: null },
             { band: "", size: "", chosenImage: null },
@@ -142,12 +133,6 @@ export default {
             { band: "", size: "", chosenImage: null },
           ],
         },
-      },
-
-      coHeadliner: {
-        thursday: false,
-        friday: false,
-        saturday: false,
       },
     };
   },
@@ -180,11 +165,11 @@ export default {
       const slot = this.getSlot(this.modalSlug, this.modalPosition);
       slot.size = `${size}-band-logo`;
     },
-    handleCoHeadliner({ day, value }) {
-      if (day === "Thursday") this.coHeadliner.thursday = value;
-      if (day === "Friday") this.coHeadliner.friday = value;
-      if (day === "Saturday") this.coHeadliner.saturday = value;
-    },
+    // handleCoHeadliner({ day, value }) {
+    //   if (day === "Thursday") this.coHeadliner.thursday = value;
+    //   if (day === "Friday") this.coHeadliner.friday = value;
+    //   if (day === "Saturday") this.coHeadliner.saturday = value;
+    // },
     closeModal() {
       this.isModalVisible = false;
     },
@@ -201,7 +186,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use "../../assets/scss/styles.scss";
+@use "../../../assets/scss/styles.scss";
 
 .poster-content {
   position: absolute;
@@ -209,12 +194,14 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  height: 100%;           /* desktop: full poster height */
+  height: 100%;
   box-sizing: border-box;
-  padding-top: 15%;     /* aligns headliner with artwork */
+  padding-top: 25%;
   padding-bottom: 5%;
   padding-left: 5%;
   padding-right: 4%;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .row {
@@ -222,40 +209,5 @@ export default {
   display: flex;
   justify-content: center; // centers bands horizontally
 }
-
-.band-grid-wednesday {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: stretch;
-  gap: 1%;
-  height: 7%;
-  box-sizing: border-box;
-}
-
-
-/* First slot (headliner) */
-.band-grid-wednesday .headliner {
-  width: 40%;
-}
-
-/* Remaining three slots */
-.band-grid-wednesday .main-sub {
-  width: 20%;
-}
-
-.band-grid-wednesday .headliner,
-.band-grid-wednesday .main-sub {
-  border: 1px solid transparent;  // reserve space
-  box-sizing: border-box;          // include border in width/height
-}
-
-.band-grid-wednesday .headliner:hover,
-.band-grid-wednesday .main-sub:hover {
-  border-color: #C67D0E;
-}
-
-
-
 
 </style>

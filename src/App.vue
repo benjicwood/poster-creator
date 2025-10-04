@@ -1,16 +1,11 @@
 <template>
-  <div id="app">
-    <Poster />
-  </div>
+    <router-view />
 </template>
 
 <script>
-import Poster from "./components/Poster.vue";
-import BandGrid from "./components/BandGrid/BandGrid.vue";
 
 export default {
   name: "App",
-  components: { Poster }
 };
 </script>
 
@@ -23,7 +18,7 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: black;
-  /* background-image: url(../assets/background/trees-blank-2026-feb-17-25.png); */
+  /* background-image: url(./assets/background/trees-blank-2026-feb-17-25.png); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top center;

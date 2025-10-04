@@ -1,9 +1,9 @@
 <template>
   <div class="poster-container">
     <div class="poster-wrapper">
-      <img
+        <img
         class="poster-background"
-        src="../assets/background/trees-blank-2026.png"
+        src="../../assets/background/download-blank-2026.png"
         alt="Festival Poster"
       />
       <BandGrid />
@@ -15,8 +15,10 @@
 import BandGrid from "./BandGrid/BandGrid.vue";
 
 export default {
-  name: "Poster",
-  components: { BandGrid },
+  name: "DownloadFourDay",
+  components: {
+    BandGrid,
+  },
 };
 </script>
 
@@ -37,7 +39,7 @@ export default {
 
 .poster-background {
   display: block;
-  max-width: 90vw;
+  max-width: 98vw;
   max-height: 100vh;
   width: auto;
   height: auto;
@@ -48,12 +50,6 @@ export default {
   .poster-wrapper {
     display: flex;
     justify-content: center; /* centers poster */
-  }
-
-  .poster-content {
-    height: auto;           /* match image height */
-    top: 0;
-    transform: translateX(-50%);
   }
 }
 </style>

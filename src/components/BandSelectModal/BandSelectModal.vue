@@ -17,6 +17,21 @@
           </SearchDropdown>
         </slot>
 
+        <!-- inside modal-body, after SearchDropdown -->
+        <div
+          v-if="isCustom || (!bandSelected && !hasBand)"
+          class="custom-band-input"
+        >
+          <label for="customBand">Or enter with custom text:</label>
+          <input
+            id="customBand"
+            type="text"
+            v-model="customBandText"
+            @input="onCustomBandInput"
+            placeholder="Type your own band..."
+          />
+        </div>
+
         <!-- 🔥 Preview + selection -->
         <div v-if="selectedBand" class="band-preview">
           <!-- <h4>{{ selectedBand.name }}</h4> -->
@@ -98,7 +113,15 @@
         </div>
       </template>
 
-      <!-- <button type="button" class="btn-red" @click="close">Close Modal</button> -->
+      <!-- 👇 Clear button -->
+      <div class="clear-selection">
+        <button type="button" class="button-clear" @click="clearSelection">
+          Clear Selection
+        </button>
+        <button type="button" class="button-confirm" @click="close">
+          Confirm Selection
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -131,6 +154,8 @@ export default {
       bandSelected: false,
       selectedBand: null,
       chosenImage: null,
+      customBandText: "", // 👈 new field
+      isCustom: false,
       sliderValue: 4, // Initial value
       minValue: 1,
       maxValue: 7,
@@ -194,6 +219,17 @@ export default {
   },
   methods: {
     onSelectedOption(selected) {
+      if (!selected || !selected.id) {
+        // blank option chosen
+        this.bandSelected = false;
+        this.selectedBand = null;
+        this.chosenImage = null;
+        this.isCustom = true; // 👈 force custom input visible
+        this.$emit("selected", { id: null, name: "", custom: true });
+        return;
+      }
+      this.isCustom = false; // switch to "real band" mode
+      this.customBandText = ""; // clear custom text
       this.bandSelected = selected.id ? true : false;
       this.selectedBand = selected;
       // default to logo if available
@@ -213,9 +249,30 @@ export default {
       // });
       // }
     },
+    clearSelection() {
+      this.bandSelected = false;
+      this.selectedBand = null;
+      this.chosenImage = null;
+      this.isCustom = true; // go back into custom mode
+      this.customBandText = ""; // reset text field
+      this.$emit("selected", { id: null, name: "", custom: true });
+    },
     selectImage(img) {
+      this.isCustom = false; // using image now
+      this.customBandText = ""; // clear custom text
       this.chosenImage = img;
       this.$emit("selected", { ...this.selectedBand, chosenImage: img });
+    },
+
+    onCustomBandInput() {
+      this.isCustom = true;
+      if (this.customBandText.trim()) {
+        this.$emit("selected", {
+          id: null,
+          name: this.customBandText.trim(),
+          custom: true,
+        });
+      }
     },
 
     getSize(size) {
@@ -253,7 +310,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -266,7 +323,7 @@ export default {
   align-items: center;
   z-index: 1000;
   overflow-y: auto; /* allows scrolling if modal taller than viewport */
-  padding: 1rem;    /* space around modal on small screens */
+  padding: 1rem; /* space around modal on small screens */
   box-sizing: border-box;
 }
 
@@ -290,8 +347,14 @@ export default {
 }
 
 @keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-header,
@@ -302,11 +365,12 @@ export default {
 }
 
 .modal-header {
-  border-bottom: 1px solid #e0e0e0;
-  background-color: #711214;
-  color: white;
-  justify-content: space-between;
-  border-top-left-radius:6px;
+  border-bottom: 1px solid #711214;;
+  background-color: #E5F5F4;
+  color: rgb(60, 54, 54);
+  font-weight: 600;
+  justify-content: center;
+  border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
 
@@ -322,8 +386,8 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: 70vh;       /* prevents modal from exceeding viewport */
-  position: relative;   /* needed for absolute children */
+  max-height: 70vh; /* prevents modal from exceeding viewport */
+  position: relative; /* needed for absolute children */
   overflow: visible;
 }
 
@@ -333,8 +397,8 @@ export default {
 
 .modal-body .dropdown .dropdown-toggle input {
   width: 100%;
+  padding-left: 0.5rem;
 }
-
 
 /* Close button */
 .btn-close {
@@ -346,7 +410,7 @@ export default {
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   font-weight: bold;
-  color: #fff;
+  color: rgb(60, 54, 54);
   background: transparent;
   transition: color 0.2s;
 }
@@ -355,18 +419,18 @@ export default {
 }
 
 /* Primary button */
-.btn-red {
-  color: white;
-  background: #711214;
-  border: 1px solid #711214;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-red:hover {
-  background: #a31f2c;
-}
+// .btn-red {
+//   color: white;
+//   background: #711214;
+//   border: 1px solid #711214;
+//   padding: 0.5rem 1rem;
+//   border-radius: 6px;
+//   cursor: pointer;
+//   transition: background 0.2s;
+// }
+// .btn-red:hover {
+//   background: #a31f2c;
+// }
 
 /* Slider styling */
 .slider-container {
@@ -389,11 +453,22 @@ input[type="range"] {
   gap: 0.5rem;
 }
 
-.band-logo img {
-  max-width: 200px;
-  height: auto;
-  /* border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
+.band-logo {
+  width: 220px;  // fixed container size
+  height: 100px; // adjust to what feels right
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(20, 10, 38);
+  padding: 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: scale-down; // shrink to fit, never stretch
+  }
 }
 
 .band-images {
@@ -409,13 +484,87 @@ input[type="range"] {
   cursor: pointer;
   transition: border 0.2s, transform 0.2s;
   border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: rgb(20, 10, 38); // hmm
+
 }
 .band-images img:hover {
   transform: scale(1.05);
 }
-.band-image.active {
-  border-color: #711214; /* highlight selected */
+
+.band-image {
+  width: 90px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111; // fallback background
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.2s, transform 0.2s;
+
+  &.active {
+    border-color: rgb(35, 220, 35);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down; // keeps aspect ratio, fills the box
+  }
 }
 
+.custom-band-input {
+  position: relative;
+  display: inline-block;
+  transition: 0.75s ease-in;
+  border-radius: 2px 2px 0 0;
+}
+.custom-band-input input {
+  border: none;
+  background: #0002;
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  outline: none;
+  transition: 0.75s ease-in;
+  color: gray;
+  border-radius: 4px;
+  height: 1.5rem;
+  width: 50%;
+}
+
+.clear-selection {
+  // margin-top: 1rem;
+  text-align: center;
+  padding: 0.8rem;
+
+  button {
+    border: 1px solid white;
+    color: white;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: filter 0.2s ease; // smooth hover
+
+    &.button-confirm {
+      background: green;
+    }
+    &.button-clear {
+      background: #711214;
+    }
+
+    &:hover {
+      filter: brightness(0.8); // darkens the current background
+    }
+  }
+}
 </style>
