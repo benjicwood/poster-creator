@@ -4,6 +4,6 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig(({ command }) => {
   return {
     plugins: [vue()],
-    base: command === 'build' ? '/poster-creator/' : '/', // 🏗 build vs dev
+    base: command === 'build' ? '/poster-creator/' : '/',
   }
 })

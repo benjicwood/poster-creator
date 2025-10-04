@@ -1,30 +1,25 @@
 #!/usr/bin/env sh
-# abort on errors
 set -e
 
-# build
+# 1. Build the project
 npm run build
 
-# navigate into the build output directory
+# 2. Navigate into the build output directory
 cd dist
 
-# remove any previous git repo in dist
+# 3. Remove any previous git history in dist
 rm -rf .git
 
-# initialize a temporary git repo
+# 4. Initialize a temporary git repo
 git init -b main
 git add -A
 git commit -m 'deploy'
 
-# deploy to GitHub Pages
-# using SSH:
+# 5. Push to GitHub Pages
+# Use SSH (ensure your SSH key is set up)
 git push -f git@github.com:benjicwood/poster-creator.git main:gh-pages
 
-# if you prefer HTTPS instead, uncomment:
-# git push -f https://github.com/benjicwood/poster-creator.git main:gh-pages
-
-# cleanup
+# 6. Return to root
 cd -
-rm -rf dist/.git
 
-echo "✅ Deployment complete! Your site should be live at https://benjicwood.github.io/poster-creator/"
+echo "✅ Deployment complete! Visit: https://benjicwood.github.io/poster-creator/"
