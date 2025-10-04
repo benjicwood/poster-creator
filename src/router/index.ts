@@ -1,10 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 import HomeMenu from '../components/HomeMenu/HomeMenu.vue';
-
 import TreesPoster from '../components/TreesPoster/TreesPoster.vue';
 import DownloadPoster from '../components/DownloadPoster/DownloadPoster.vue';
-
 
 const routes = [
   { path: "/", component: HomeMenu },
@@ -13,7 +11,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(), // 🔹 use hash mode
   routes,
 })
 
