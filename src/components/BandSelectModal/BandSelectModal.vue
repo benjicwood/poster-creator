@@ -237,16 +237,27 @@ export default {
       this.$emit("selected", { ...selected, chosenImage: this.chosenImage });
       // this.$emit('selected', selected);
 
+      if (selected?.name) {
+        const day = this.title?.split(" ")[0] || "Unknown"; // extract first word as day
+        const position = this.title || "Unknown";
+
+        window.gtag("event", "band_selected", {
+          band_name: selected.name,
+          day,
+          position,
+          value: 1,
+        });
+      }
       // if (selected?.name) {
-      //     window.gtag('event', 'band_selected', {
+      //   window.gtag("event", "band_selected", {
       //     band_name: selected.name,
       //     value: 1,
-      // });
-      //     window.gtag('event', 'band_selected', {
-      //     event_category: 'interaction',
+      //   });
+      //   window.gtag("event", "band_selected", {
+      //     event_category: "interaction",
       //     event_label: selected.name,
       //     value: 1,
-      // });
+      //   });
       // }
     },
     clearSelection() {
@@ -365,8 +376,8 @@ export default {
 }
 
 .modal-header {
-  border-bottom: 1px solid #711214;;
-  background-color: #E5F5F4;
+  border-bottom: 1px solid #711214;
+  background-color: #e5f5f4;
   color: rgb(60, 54, 54);
   font-weight: 600;
   justify-content: center;
@@ -454,7 +465,7 @@ input[type="range"] {
 }
 
 .band-logo {
-  width: 220px;  // fixed container size
+  width: 220px; // fixed container size
   height: 100px; // adjust to what feels right
   display: flex;
   align-items: center;
@@ -486,7 +497,6 @@ input[type="range"] {
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   background: rgb(20, 10, 38); // hmm
-
 }
 .band-images img:hover {
   transform: scale(1.05);
