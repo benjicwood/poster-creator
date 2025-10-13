@@ -22,13 +22,15 @@
           v-if="isCustom || (!bandSelected && !hasBand)"
           class="custom-band-input"
         >
-          <label for="customBand">Or enter with custom text:</label>
+          <!-- <label for="customBand" class="custom-text"
+            >Or enter with custom text:</label
+          > -->
           <input
             id="customBand"
             type="text"
             v-model="customBandText"
             @input="onCustomBandInput"
-            placeholder="Type your own band..."
+            placeholder="Band missing? enter with custom text..."
           />
         </div>
 
@@ -67,7 +69,7 @@
               v-model="thursdayCoHeadlinerModel"
               @change="emitCoHeadliner('Thursday', thursdayCoHeadliner)"
             />
-            is Co-Headliner (Thursday)
+            <span style="color:black; margin-left: 2px;">is Co-Headliner (Thursday)</span>
           </label>
         </div>
       </template>
@@ -80,7 +82,7 @@
               v-model="fridayCoHeadlinerModel"
               @change="emitCoHeadliner('Friday', fridayCoHeadliner)"
             />
-            is Co-Headliner (Friday)
+            <span style="color:black; margin-left: 2px;">is Co-Headliner (Friday)</span>
           </label>
         </div>
       </template>
@@ -93,7 +95,7 @@
               v-model="saturdayCoHeadlinerModel"
               @change="emitCoHeadliner('Saturday', saturdayCoHeadliner)"
             />
-            is Co-Headliner (Saturday)
+            <span style="color:black; margin-left: 2px;">is Co-Headliner (Saturday)</span>
           </label>
         </div>
       </template>
@@ -275,12 +277,31 @@ export default {
       this.$emit("selected", { ...this.selectedBand, chosenImage: img });
     },
 
+    // onCustomBandInput() {
+    //   this.isCustom = true;
+    //   if (this.customBandText.trim()) {
+    //     this.$emit("selected", {
+    //       id: null,
+    //       name: this.customBandText.trim(),
+    //       custom: true,
+    //     });
+    //   }
+    // },
     onCustomBandInput() {
       this.isCustom = true;
-      if (this.customBandText.trim()) {
+      const text = this.customBandText.trim();
+
+      if (text) {
         this.$emit("selected", {
           id: null,
-          name: this.customBandText.trim(),
+          name: text,
+          custom: true,
+        });
+      } else {
+        // emit a clear event when input is empty
+        this.$emit("selected", {
+          id: null,
+          name: "",
           custom: true,
         });
       }
@@ -409,6 +430,14 @@ export default {
 .modal-body .dropdown .dropdown-toggle input {
   width: 100%;
   padding-left: 0.5rem;
+  @media (min-width: 769px) {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  @media (max-width: 768px) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
 }
 
 /* Close button */
@@ -539,7 +568,6 @@ input[type="range"] {
 .custom-band-input input {
   border: none;
   background: #0002;
-  margin-left: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -548,7 +576,22 @@ input[type="range"] {
   color: gray;
   border-radius: 4px;
   height: 1.5rem;
-  width: 50%;
+  @media (min-width: 769px) {
+    margin-left: 2px;
+    width: 50%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.custom-text {
+  padding-left: 0.5rem;
+  color: black;
 }
 
 .clear-selection {
