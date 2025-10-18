@@ -45,6 +45,14 @@ export default {
       return this.selectedYear === "2025" ? bg2025 : bg2026;
     },
   },
+  mounted() {
+    // document.body.classList.add("download-poster-bg");
+    document.body.style.backgroundColor = "#213862";
+
+  },
+  beforeUnmount() {
+    document.body.style.backgroundColor = "";
+  },
 };
 </script>
 
@@ -91,7 +99,7 @@ export default {
   left: 10px;
   z-index: 1000;
   display: flex;
-  gap: 0.5rem;              // space between buttons
+  gap: 0.5rem; // space between buttons
   background: rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
   border-radius: 6px;
@@ -112,7 +120,7 @@ export default {
     }
 
     &.active {
-      background: #c67d0e;    // highlight active year
+      background: #c67d0e; // highlight active year
       color: white;
       filter: none;
     }
@@ -124,5 +132,4 @@ export default {
     right: 10px;
   }
 }
-
 </style>

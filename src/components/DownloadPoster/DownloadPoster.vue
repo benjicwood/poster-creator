@@ -1,7 +1,7 @@
 <template>
   <div class="poster-container">
     <div class="poster-wrapper">
-        <img
+      <img
         class="poster-background"
         src="../../assets/background/download-blank-2026.png"
         alt="Festival Poster"
@@ -19,6 +19,14 @@ export default {
   components: {
     BandGrid,
   },
+  mounted() {
+    // document.body.classList.add("download-poster-bg");
+    document.body.style.backgroundColor = "#1f2832"; // or whatever color
+
+  },
+  beforeUnmount() {
+    document.body.style.backgroundColor = ""; // reset when leaving
+  },
 };
 </script>
 
@@ -34,7 +42,7 @@ export default {
 .poster-wrapper {
   position: relative;
   display: inline-block; /* shrink-wraps image */
-  margin: auto;          /* centers on mobile */
+  margin: auto; /* centers on mobile */
 }
 
 .poster-background {

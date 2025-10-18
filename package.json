@@ -1,5 +1,5 @@
 {
-  "name": "poster-creator",
+  "name": "@benjicwood/poster-creator",
   "private": false,
   "version": "0.0.0",
   "type": "module",
@@ -8,6 +8,9 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "deploy": "sh deploy.sh"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "@benjicwood/artist-assets": "^1.0.14",
