@@ -8,6 +8,7 @@
         :band="bands.headliner.band"
         :size="bands.headliner.size"
         :chosenImage="bands.headliner.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
       <!-- Main stage undercard -->
       <!-- <div class="main-stage-block"> -->
@@ -19,6 +20,7 @@
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
       <!-- </div> -->
       <div class="mainstage-input-grid">
@@ -38,6 +40,7 @@
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
 
       <div class="input-grid">
@@ -58,6 +61,7 @@
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
 
       <div class="input-grid">
@@ -78,6 +82,7 @@
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
 
       <!-- Inputs (optional, could also be slotted in) -->
@@ -101,6 +106,7 @@ export default {
     slug: { type: String, required: true }, // e.g. "dayOne"
     bands: { type: Object, required: true }, // includes headliner, coHeadliner, secondRow, thirdRow, fourthRow
     coHeadliner: { type: Boolean, default: false },
+    alwaysHighlight: { type: Boolean, default: false },
   },
   emits: ["open"],
   methods: {

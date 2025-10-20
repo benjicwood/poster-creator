@@ -6,10 +6,10 @@
         src="../../assets/background/download-blank-2026.png"
         alt="Festival Poster"
       />
-      <BandGrid ref="bandGrid" />
+      <BandGrid ref="bandGrid" :alwaysHighlight="isMobile && posterEmpty" />
       <!-- Click to start overlay -->
       <div v-if="isMobile && posterEmpty" class="click-start">
-        Click to start
+        click a section to start
       </div>
     </div>
   </div>
@@ -233,6 +233,7 @@ export default {
 
 /* Toggle button */
 .toggle-bar {
+  border: 2px solid white;
   position: fixed;
   bottom: 4.5rem;
   left: 50%;
@@ -240,7 +241,6 @@ export default {
   z-index: 101;
   background: rgba(31, 40, 50, 0.95);
   color: white;
-  border: none;
   border-radius: 9999px;
   padding: 0.4rem 0.6rem;
   cursor: pointer;
@@ -332,7 +332,7 @@ export default {
 
 .click-start {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
@@ -340,5 +340,6 @@ export default {
   font-weight: bold;
   text-align: center;
   pointer-events: none;
+  width: 90%;
 }
 </style>

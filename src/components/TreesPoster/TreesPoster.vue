@@ -6,15 +6,17 @@
         :src="backgroundSrc"
         alt="Festival Poster"
       />
-      <BandGrid />
+      <BandGrid ref="bandGrid" :alwaysHighlight="isMobile && posterEmpty" />
+      <!-- Click to start overlay -->
+      <div v-if="isMobile && posterEmpty" class="click-start">
+        click a section to start
+      </div>
     </div>
   </div>
 
   <!-- Fixed bottom bar -->
   <div class="button-row" :class="{ hidden: controlsHidden }">
-    <button class="download-btn" @click="downloadPoster">
-      Export Poster
-    </button>
+    <button class="download-btn" @click="downloadPoster">Export Poster</button>
 
     <button v-if="isMobile" class="share-btn" @click="sharePoster">
       Share Poster
@@ -36,7 +38,6 @@
   </div>
 </template>
 
-
 <script>
 import BandGrid from "./BandGrid/BandGrid.vue";
 import { toPng, toBlob } from "html-to-image";
@@ -49,6 +50,7 @@ export default {
 
   data() {
     return {
+      isHidden: false,
       selectedYear: "2026",
       isMobile: false,
       controlsHidden: false,
@@ -57,6 +59,19 @@ export default {
   },
 
   computed: {
+    posterEmpty() {
+      const grid = this.$refs.bandGrid;
+      if (!grid) return true;
+
+      return Object.values(grid.days).every((day) => {
+        return Object.values(day).every((row) => {
+          if (Array.isArray(row)) {
+            return row.every((slot) => !slot.band);
+          }
+          return !row.band;
+        });
+      });
+    },
     backgroundSrc() {
       return this.selectedYear === "2025" ? bg2025 : bg2026;
     },
@@ -96,7 +111,10 @@ export default {
 
     async sharePoster() {
       const node = this.$refs.poster;
-      const blob = await toBlob(node, { backgroundColor: "#000", pixelRatio: 2 });
+      const blob = await toBlob(node, {
+        backgroundColor: "#000",
+        pixelRatio: 2,
+      });
       const file = new File([blob], `trees-poster-${this.selectedYear}.png`, {
         type: "image/png",
       });
@@ -122,7 +140,10 @@ export default {
 
     async copyPoster() {
       const node = this.$refs.poster;
-      const blob = await toBlob(node, { backgroundColor: "#000", pixelRatio: 2 });
+      const blob = await toBlob(node, {
+        backgroundColor: "#000",
+        pixelRatio: 2,
+      });
       await navigator.clipboard.write([
         new ClipboardItem({ "image/png": blob }),
       ]);
@@ -131,7 +152,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped lang="scss">
 .poster-container {
@@ -180,6 +200,7 @@ export default {
 
 /* Toggle button */
 .toggle-bar {
+  border: 2px solid white;
   position: fixed;
   bottom: 4.5rem;
   // left: 50%;
@@ -187,7 +208,6 @@ export default {
   z-index: 101;
   background: rgba(23, 39, 68, 0.95);
   color: white;
-  border: none;
   border-radius: 9999px;
   padding: 0.4rem 0.6rem;
   cursor: pointer;
@@ -269,5 +289,18 @@ export default {
     bottom: 0;
     margin-bottom: 1rem;
   }
+}
+
+.click-start {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  pointer-events: none;
+  width: 90%;
 }
 </style>
