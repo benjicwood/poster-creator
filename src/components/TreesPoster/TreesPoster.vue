@@ -1,5 +1,20 @@
 <template>
   <div class="poster-container">
+    <!-- Background selector buttons -->
+    <div class="background-selector">
+      <button
+        :class="{ active: selectedYear === '2025' }"
+        @click="selectedYear = '2025'"
+      >
+        2025
+      </button>
+      <button
+        :class="{ active: selectedYear === '2026' }"
+        @click="selectedYear = '2026'"
+      >
+        2026
+      </button>
+    </div>
     <div class="poster-wrapper" ref="poster">
       <img
         class="poster-background"
@@ -302,5 +317,45 @@ export default {
   text-align: center;
   pointer-events: none;
   width: 90%;
+}
+
+.background-selector {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  display: flex;
+  gap: 0.5rem;              // space between buttons
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  border-radius: 6px;
+
+  button {
+    background: #333;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 600;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.8); // darken on hover
+    }
+
+    &.active {
+      background: #c67d0e;    // highlight active year
+      color: white;
+      filter: none;
+    }
+  }
+
+  // MOBILE: move to top-right
+  @media (max-width: 768px) {
+    left: auto;
+    right: 10px;
+  }
 }
 </style>
