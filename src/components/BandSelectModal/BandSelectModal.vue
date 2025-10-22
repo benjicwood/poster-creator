@@ -1,7 +1,13 @@
 <template>
   <div class="modal-backdrop">
-    <div class="modal">
-      <header class="modal-header">
+    <div
+      class="modal"
+      :style="{
+        transform: `translate(${drag.offsetX}px, ${drag.offsetY}px)`,
+        cursor: drag.active ? 'grabbing' : 'default',
+      }"
+    >
+      <header class="modal-header" @mousedown="startDrag" @touchstart="startDrag" @touchmove.prevent="onDrag" style="cursor: grab">
         <slot name="header"> Select your {{ title }} </slot>
         <button type="button" class="btn-close" @click="close">x</button>
       </header>
@@ -69,7 +75,9 @@
               v-model="thursdayCoHeadlinerModel"
               @change="emitCoHeadliner('Thursday', thursdayCoHeadliner)"
             />
-            <span style="color:black; margin-left: 2px;">is Co-Headliner (Thursday)</span>
+            <span style="color: black; margin-left: 2px"
+              >is Co-Headliner (Thursday)</span
+            >
           </label>
         </div>
       </template>
@@ -82,7 +90,9 @@
               v-model="fridayCoHeadlinerModel"
               @change="emitCoHeadliner('Friday', fridayCoHeadliner)"
             />
-            <span style="color:black; margin-left: 2px;">is Co-Headliner (Friday)</span>
+            <span style="color: black; margin-left: 2px"
+              >is Co-Headliner (Friday)</span
+            >
           </label>
         </div>
       </template>
@@ -95,7 +105,9 @@
               v-model="saturdayCoHeadlinerModel"
               @change="emitCoHeadliner('Saturday', saturdayCoHeadliner)"
             />
-            <span style="color:black; margin-left: 2px;">is Co-Headliner (Saturday)</span>
+            <span style="color: black; margin-left: 2px"
+              >is Co-Headliner (Saturday)</span
+            >
           </label>
         </div>
       </template>
@@ -133,7 +145,7 @@
 import SearchDropdown from "./SearchDropdown.vue";
 import { bands } from "@benjicwood/artist-assets";
 
-console.log(bands);
+// console.log(bands);
 
 export default {
   name: "BandSelectModal",
@@ -167,6 +179,13 @@ export default {
       // fridayCoHeadliner: this.fridayCoHeadliner,
       // saturdayCoHeadliner: this.saturdaCoHeadliner,
       // isCoHeadliner: false,
+      drag: {
+        active: false,
+        startX: 0,
+        startY: 0,
+        offsetX: 0,
+        offsetY: 0,
+      },
     };
   },
   computed: {
@@ -210,6 +229,14 @@ export default {
     },
   },
   mounted() {
+    // Mouse listeners
+    window.addEventListener("mousemove", this.onDrag);
+    window.addEventListener("mouseup", this.stopDrag);
+
+    // Touch listeners
+    window.addEventListener("touchmove", this.onDrag);
+    window.addEventListener("touchend", this.stopDrag);
+
     if (this.currentBand) {
       const band = this.bands.find((b) => b.id === this.currentBand);
       if (band) {
@@ -218,6 +245,12 @@ export default {
           this.currentImage || band.logo || band.images?.[0] || null;
       }
     }
+  },
+  beforeUnmount() {
+    window.removeEventListener("mousemove", this.onDrag);
+    window.removeEventListener("mouseup", this.stopDrag);
+    window.removeEventListener("touchmove", this.onDrag);
+    window.removeEventListener("touchend", this.stopDrag);
   },
   methods: {
     onSelectedOption(selected) {
@@ -336,7 +369,45 @@ export default {
       // }
     },
     close() {
+      // Reset modal position
+      this.drag.offsetX = 0;
+      this.drag.offsetY = 0;
+
       this.$emit("close");
+    },
+    startDrag(e) {
+      // Support touch and mouse
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      this.drag.active = true;
+      this.drag.startX = clientX - this.drag.offsetX;
+      this.drag.startY = clientY - this.drag.offsetY;
+
+      // Prevent text/image selection on drag
+      document.body.style.userSelect = "none";
+    },
+
+    onDrag(e) {
+      if (!this.drag.active) return;
+
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      let newOffsetX = clientX - this.drag.startX;
+      let newOffsetY = clientY - this.drag.startY;
+
+      // Optional clamp (adjust these if needed)
+      const maxX = window.innerWidth * 0.75;
+      const maxY = window.innerHeight / 2;
+
+      this.drag.offsetX = Math.min(Math.max(newOffsetX, -maxX), maxX);
+      this.drag.offsetY = Math.min(Math.max(newOffsetY, -maxY), maxY);
+    },
+
+    stopDrag() {
+      this.drag.active = false;
+      document.body.style.userSelect = ""; // restore default
     },
   },
 };
