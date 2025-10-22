@@ -26,6 +26,8 @@ export default {
   /* background: #111; */
   flex-wrap: wrap; /* stacks on mobile */
   padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.3); /* tweak opacity to taste */
+  background-image: url(../../assets/background/squarespace-bg.png);
 }
 
 .menu-square {
@@ -45,6 +47,7 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top center;
+  border: 1px solid #EF492F;
 }
 
 .columned {

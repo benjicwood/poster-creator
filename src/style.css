@@ -30,7 +30,7 @@ body {
   justify-content: center; /* horizontal centering */
   align-items: flex-start; /* vertical: start/top */
   background-color: #242424; /* default background */
-  background-image: url(./assets/background/squarespace-bg.png);
+  /* background-image: url(./assets/background/squarespace-bg.png); */
   /* background-size: contain; */
   background-repeat: no-repeat;
   background-position: top center;

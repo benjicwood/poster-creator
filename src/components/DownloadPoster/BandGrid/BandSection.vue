@@ -1,5 +1,5 @@
 <template>
-  <div :class="[position, size, 'band-slot']" :style="bandStyle" @click="$emit('click')">
+  <div :class="[position, size, 'band-slot', { 'always-highlight': alwaysHighlight }]" :style="bandStyle" @click="$emit('click')">
     <span v-if="!bandStyle.backgroundImage && band" class="band-text">{{ band }}</span>
   </div>
 </template>
@@ -14,6 +14,7 @@ export default {
     position: String,
     size: String,
     chosenImage: String,
+    alwaysHighlight: { type: Boolean, default: false },
   },
   computed: {
     bandData() {
@@ -175,4 +176,7 @@ export default {
   font-size: clamp(0.8rem, 4vw, 2rem); 
 }
 
+.always-highlight {
+  border: solid #C67D0E 1px !important;
+}
 </style>

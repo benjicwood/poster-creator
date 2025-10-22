@@ -6,6 +6,7 @@
       slug="dayOne"
       :bands="days.dayOne"
       @open="openModal"
+      :alwaysHighlight="alwaysHighlight"
     />
 
     <!-- Saturday -->
@@ -14,6 +15,7 @@
       slug="dayTwo"
       :bands="days.dayTwo"
       @open="openModal"
+      :alwaysHighlight="alwaysHighlight"
     />
 
     <!-- Sunday -->
@@ -22,6 +24,7 @@
       slug="dayThree"
       :bands="days.dayThree"
       @open="openModal"
+      :alwaysHighlight="alwaysHighlight"
     />
   </div>
   <!-- Modal -->
@@ -44,6 +47,9 @@ import BandSelectModal from "../../BandSelectModal/BandSelectModal.vue";
 
 export default {
   name: "BandGrid",
+  props: {
+    alwaysHighlight: { type: Boolean, default: false },
+  },
   components: { DayGrid, BandSelectModal },
   data() {
     return {

@@ -7,6 +7,7 @@
       :bands="days.dayOne"
       :coHeadliner="coHeadliner.thursday"
       @open="openModal"
+      :alwaysHighlight="alwaysHighlight"
     />
 
     <!-- Friday -->
@@ -16,6 +17,7 @@
       :bands="days.dayTwo"
       :coHeadliner="coHeadliner.friday"
       @open="openModal"
+      :alwaysHighlight="alwaysHighlight"
     />
 
     <!-- Saturday -->
@@ -25,6 +27,7 @@
       :bands="days.dayThree"
       :coHeadliner="coHeadliner.saturday"
       @open="openModal"
+      :alwaysHighlight="alwaysHighlight"
     />
 
     <!-- Wednesday -->
@@ -37,6 +40,7 @@
       :band="days.dayFour.headliner.band"
       :size="days.dayFour.headliner.size"
       :chosenImage="days.dayFour.headliner.chosenImage"
+      :alwaysHighlight="alwaysHighlight"
     />
 
     <!-- Other 3 bands -->
@@ -49,6 +53,7 @@
       :band="slot.band"
       :size="slot.size"
       :chosenImage="slot.chosenImage"
+      :alwaysHighlight="alwaysHighlight"
     />
     </div>
 
@@ -78,6 +83,9 @@ import BandSection from "./BandSection.vue";
 
 export default {
   name: "BandGrid",
+  props: {
+    alwaysHighlight: { type: Boolean, default: false },
+  },
   components: { DayGrid, BandSelectModal, BandSection },
   data() {
     return {
@@ -267,8 +275,5 @@ export default {
 .band-grid-wednesday .main-sub:hover {
   border-color: #C67D0E;
 }
-
-
-
 
 </style>

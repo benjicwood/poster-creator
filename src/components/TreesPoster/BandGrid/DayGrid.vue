@@ -17,6 +17,7 @@
         :band="bands.headliner.band"
         :size="bands.headliner.size"
         :chosenImage="bands.headliner.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
       <BandSection
         v-if="coHeadliner"
@@ -25,6 +26,7 @@
         :band="bands.coHeadliner.band"
         :size="bands.coHeadliner.size"
         :chosenImage="bands.coHeadliner.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
     </div>
 
@@ -38,6 +40,7 @@
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
     </div>
 
@@ -51,6 +54,7 @@
         :band="slot.band"
         :size="slot.size"
         :chosenImage="slot.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
       />
     </div>
 
@@ -74,6 +78,7 @@ export default {
     slug: { type: String, required: true }, // e.g. "dayOne"
     bands: { type: Object, required: true }, // nested object with headliner/coHeadliner/secondRow/thirdRow
     coHeadliner: { type: Boolean, default: false },
+    alwaysHighlight: { type: Boolean, default: false },
   },
   emits: ["open"],
   methods: {
