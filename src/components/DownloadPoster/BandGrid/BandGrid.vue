@@ -34,6 +34,7 @@
     @size="onResize"
     @close="closeModal"
     :title="modalTitle"
+    :position="modalPosition"
     :key="key ? key.toString() : ''"
     :hasBand="activeBand"
     :currentBand="currentBand"

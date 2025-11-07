@@ -66,6 +66,7 @@
     @close="closeModal"
     @coHeadliner="handleCoHeadliner"
     :title="modalTitle"
+    :position="modalPosition"
     :key="key ? key.toString() : ''"
     :hasBand="activeBand"
     :thursdayCoHeadliner="coHeadliner.thursday"

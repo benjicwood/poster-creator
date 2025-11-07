@@ -158,6 +158,7 @@ export default {
     saturdayCoHeadliner: Boolean,
     currentBand: String, // band id
     currentImage: String, // chosen image URL
+    position: String,
   },
   components: {
     SearchDropdown,
@@ -274,7 +275,9 @@ export default {
 
       if (selected?.name) {
         const day = this.title?.split(" ")[0] || "Unknown"; // extract first word as day
-        const position = this.title || "Unknown";
+        const position = this.position || "Unknown";
+
+        // console.log("%cposition:", "font-size:20px; color:orange;", position);
 
         window.gtag("event", "band_selected", {
           band_name: selected.name,
