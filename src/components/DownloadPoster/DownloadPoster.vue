@@ -141,7 +141,7 @@ export default {
           link.click();
           this.showToast(
             "Sharing not supported — poster downloaded instead.",
-            "error"
+            "error",
           );
         }
       } catch (err) {
@@ -222,7 +222,9 @@ export default {
   border-radius: 12px 12px 0 0;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 
   &.hidden {
     transform: translate(-50%, 100%);
@@ -246,7 +248,9 @@ export default {
   cursor: pointer;
   font-size: 1.2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  transition: background 0.2s ease, bottom 0.3s ease;
+  transition:
+    background 0.2s ease,
+    bottom 0.3s ease;
 
   &:hover {
     background: rgba(31, 40, 50, 1);

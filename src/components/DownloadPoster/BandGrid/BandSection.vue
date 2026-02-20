@@ -1,6 +1,17 @@
 <template>
-  <div :class="[position, size, 'band-slot', { 'always-highlight': alwaysHighlight }]" :style="bandStyle" @click="$emit('click')">
-    <span v-if="!bandStyle.backgroundImage && band" class="band-text">{{ band }}</span>
+  <div
+    :class="[
+      position,
+      size,
+      'band-slot',
+      { 'always-highlight': alwaysHighlight },
+    ]"
+    :style="bandStyle"
+    @click="$emit('click')"
+  >
+    <span v-if="!bandStyle.backgroundImage && band" class="band-text">{{
+      band
+    }}</span>
   </div>
 </template>
 
@@ -43,14 +54,14 @@ export default {
   background-position: center;
   height: 25%;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
 }
 
 .mainstage-headliner:hover {
-    border: solid #C67D0E 1px;
+  border: solid #c67d0e 1px;
 }
 
 .main-sub {
@@ -60,14 +71,14 @@ export default {
   // height: 50px;
   height: 15%;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
 }
 
 .main-sub:hover {
-    border: solid #C67D0E 1px;
+  border: solid #c67d0e 1px;
 }
 
 .second-stage {
@@ -77,7 +88,7 @@ export default {
   // height: 50px;
   height: 30%;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
@@ -88,7 +99,7 @@ export default {
 }
 
 .second-stage:hover {
-    border: solid #C67D0E 1px;
+  border: solid #c67d0e 1px;
 }
 
 .main-third {
@@ -97,7 +108,7 @@ export default {
   background-position: center;
   height: 38px;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
@@ -109,14 +120,14 @@ export default {
   background-position: center;
   height: 35%;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
 }
 
 .third-stage:hover {
-    border: solid #C67D0E 1px;
+  border: solid #c67d0e 1px;
 }
 
 .fourth-stage {
@@ -125,16 +136,15 @@ export default {
   background-position: center;
   height: 35%;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
 }
 
 .fourth-stage:hover {
-    border: solid #C67D0E 1px;
+  border: solid #c67d0e 1px;
 }
-
 
 .second-sub {
   background-size: contain;
@@ -142,7 +152,7 @@ export default {
   background-position: center;
   height: 35px;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
@@ -154,7 +164,7 @@ export default {
   background-position: center;
   height: 40px;
   color: white;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
   border: 1px solid transparent;
@@ -169,14 +179,14 @@ export default {
 
 .band-text {
   color: white; // festival poster default
-  font-family: 'Impact', sans-serif;
+  font-family: "Impact", sans-serif;
   line-height: 1.1;
   word-break: break-word;
   max-width: 90%; // stops text overflowing
-  font-size: clamp(0.8rem, 4vw, 2rem); 
+  font-size: clamp(0.8rem, 4vw, 2rem);
 }
 
 .always-highlight {
-  border: solid #C67D0E 1px !important;
+  border: solid #c67d0e 1px !important;
 }
 </style>
