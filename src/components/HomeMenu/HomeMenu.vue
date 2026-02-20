@@ -1,10 +1,10 @@
 <template>
   <div class="menu-screen">
     <router-link to="/trees" class="menu-square stacked">
-        <!-- <p>Stacked Days Poster</p> -->
+      <!-- <p>Stacked Days Poster</p> -->
     </router-link>
     <router-link to="/download" class="menu-square columned">
-        <!-- <p>Column Poster</p> -->
+      <!-- <p>Column Poster</p> -->
     </router-link>
   </div>
 </template>
@@ -37,25 +37,27 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #E5F5F4;
+  background: #e5f5f4;
   color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
   border-radius: 1rem;
   text-decoration: none;
-  transition: background 0.3s, transform 0.2s;
+  transition:
+    background 0.3s,
+    transform 0.2s;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top center;
-  border: 1px solid #EF492F;
+  border: 1px solid #ef492f;
 }
 
 .columned {
-    background-image: url(../../assets/icons/columned-light.png);
+  background-image: url(../../assets/icons/columned-light.png);
 }
 
 .stacked {
-    background-image: url(../../assets/icons/stacked-light.png);
+  background-image: url(../../assets/icons/stacked-light.png);
 }
 
 .menu-square:hover {

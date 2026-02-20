@@ -7,7 +7,13 @@
         cursor: drag.active ? 'grabbing' : 'default',
       }"
     >
-      <header class="modal-header" @mousedown="startDrag" @touchstart="startDrag" @touchmove.prevent="onDrag" style="cursor: grab">
+      <header
+        class="modal-header"
+        @mousedown="startDrag"
+        @touchstart="startDrag"
+        @touchmove.prevent="onDrag"
+        style="cursor: grab"
+      >
         <slot name="header"> Select your {{ title }} </slot>
         <button type="button" class="btn-close" @click="close">x</button>
       </header>
@@ -596,7 +602,9 @@ input[type="range"] {
   border: 2px solid transparent;
   border-radius: 4px;
   cursor: pointer;
-  transition: border 0.2s, transform 0.2s;
+  transition:
+    border 0.2s,
+    transform 0.2s;
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   background: rgb(20, 10, 38); // hmm
@@ -616,7 +624,9 @@ input[type="range"] {
   background: #111; // fallback background
   border: 2px solid transparent;
   cursor: pointer;
-  transition: border 0.2s, transform 0.2s;
+  transition:
+    border 0.2s,
+    transform 0.2s;
 
   &.active {
     border-color: rgb(35, 220, 35);

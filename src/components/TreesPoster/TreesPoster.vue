@@ -111,6 +111,12 @@ export default {
 
     async downloadPoster() {
       const node = this.$refs.poster;
+
+      const blob = await toBlob(node, {
+        backgroundColor: "#000",
+        pixelRatio: 2,
+      });
+
       const dataUrl = await toPng(node, {
         quality: 1,
         cacheBust: true,
@@ -121,7 +127,15 @@ export default {
       link.download = `trees-poster-${this.selectedYear}.png`;
       link.href = dataUrl;
       link.click();
-      this.showToast("Poster downloaded!");
+
+      try {
+        await this.uploadPosterToCloudinary(blob);
+        this.showToast("Poster downloaded!");
+      } catch (e) {
+        console.error(e);
+        this.showToast("Poster downloaded", "error");
+      }
+      //this.showToast("Poster downloaded!");
     },
 
     async sharePoster() {
@@ -148,7 +162,7 @@ export default {
         link.click();
         this.showToast(
           "Sharing not supported — poster downloaded instead.",
-          "error"
+          "error",
         );
       }
     },
@@ -163,6 +177,27 @@ export default {
         new ClipboardItem({ "image/png": blob }),
       ]);
       this.showToast("Poster copied to clipboard!");
+    },
+    async uploadPosterToCloudinary(blob) {
+      const form = new FormData();
+      form.append("file", blob);
+      form.append("upload_preset", "trees-posters");
+      form.append("tags", "trees-gallery");
+
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dhqkcdjcx/image/upload",
+        {
+          method: "POST",
+          body: form,
+        },
+      );
+
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err);
+      }
+
+      return res.json();
     },
   },
 };
@@ -204,7 +239,9 @@ export default {
   padding: 0.75rem 1.25rem;
   border-radius: 12px 12px 0 0;
   backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 
   &.hidden {
     transform: translate(-50%, 100%);
@@ -228,7 +265,9 @@ export default {
   cursor: pointer;
   font-size: 1.2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  transition: background 0.2s ease, bottom 0.3s ease;
+  transition:
+    background 0.2s ease,
+    bottom 0.3s ease;
 
   &:hover {
     background: rgba(31, 40, 50, 1);
@@ -325,7 +364,7 @@ export default {
   left: 10px;
   z-index: 1000;
   display: flex;
-  gap: 0.5rem;              // space between buttons
+  gap: 0.5rem; // space between buttons
   background: rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
   border-radius: 6px;
@@ -346,7 +385,7 @@ export default {
     }
 
     &.active {
-      background: #c67d0e;    // highlight active year
+      background: #c67d0e; // highlight active year
       color: white;
       filter: none;
     }

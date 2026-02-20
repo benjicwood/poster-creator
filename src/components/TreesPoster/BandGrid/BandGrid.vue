@@ -33,30 +33,41 @@
     <!-- Wednesday -->
     <div class="band-grid-wednesday">
       <!-- Headliner -->
-    <BandSection
-      class="headliner"
-      position="headliner"
-      @click="openModal({ slug: 'dayFour', position: 'headliner', title: 'Wednesday Headliner' })"
-      :band="days.dayFour.headliner.band"
-      :size="days.dayFour.headliner.size"
-      :chosenImage="days.dayFour.headliner.chosenImage"
-      :alwaysHighlight="alwaysHighlight"
-    />
+      <BandSection
+        class="headliner"
+        position="headliner"
+        @click="
+          openModal({
+            slug: 'dayFour',
+            position: 'headliner',
+            title: 'Wednesday Headliner',
+          })
+        "
+        :band="days.dayFour.headliner.band"
+        :size="days.dayFour.headliner.size"
+        :chosenImage="days.dayFour.headliner.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
+      />
 
-    <!-- Other 3 bands -->
-    <BandSection
-      v-for="(slot, i) in days.dayFour.secondRow"
-      :key="`wednesday-${i}`"
-      class="main-sub"
-      :position="`secondRow.${i}`"
-      @click="openModal({ slug: 'dayFour', position: `secondRow.${i}`, title: `Wednesday Band ${i + 1}` })"
-      :band="slot.band"
-      :size="slot.size"
-      :chosenImage="slot.chosenImage"
-      :alwaysHighlight="alwaysHighlight"
-    />
+      <!-- Other 3 bands -->
+      <BandSection
+        v-for="(slot, i) in days.dayFour.secondRow"
+        :key="`wednesday-${i}`"
+        class="main-sub"
+        :position="`secondRow.${i}`"
+        @click="
+          openModal({
+            slug: 'dayFour',
+            position: `secondRow.${i}`,
+            title: `Wednesday Band ${i + 1}`,
+          })
+        "
+        :band="slot.band"
+        :size="slot.size"
+        :chosenImage="slot.chosenImage"
+        :alwaysHighlight="alwaysHighlight"
+      />
     </div>
-
   </div>
   <!-- Modal -->
   <BandSelectModal
@@ -185,7 +196,7 @@ export default {
     //   slot.band = selected.id ?? "";
     //   slot.chosenImage = selected.chosenImage;
     // },
-      onSelect(selected) {
+    onSelect(selected) {
       const slot = this.getSlot(this.modalSlug, this.modalPosition);
 
       if (selected.custom) {
@@ -231,9 +242,9 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  height: 100%;           /* desktop: full poster height */
+  height: 100%; /* desktop: full poster height */
   box-sizing: border-box;
-  padding-top: 15%;     /* aligns headliner with artwork */
+  padding-top: 15%; /* aligns headliner with artwork */
   padding-bottom: 5%;
   padding-left: 5%;
   padding-right: 4%;
@@ -268,13 +279,12 @@ export default {
 
 .band-grid-wednesday .headliner,
 .band-grid-wednesday .main-sub {
-  border: 1px solid transparent;  // reserve space
-  box-sizing: border-box;          // include border in width/height
+  border: 1px solid transparent; // reserve space
+  box-sizing: border-box; // include border in width/height
 }
 
 .band-grid-wednesday .headliner:hover,
 .band-grid-wednesday .main-sub:hover {
-  border-color: #C67D0E;
+  border-color: #c67d0e;
 }
-
 </style>
